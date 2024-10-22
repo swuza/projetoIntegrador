@@ -1,0 +1,10 @@
+credentials:
+  usernames:
+    user1:
+      name: "User 1"
+      password: "senha_hash"
+
+cookie:
+  expiry_days: 30
+  name: "cookie_app"
+  key: "cookie_key"
