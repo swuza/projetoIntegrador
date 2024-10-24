@@ -75,44 +75,30 @@ def editar_registro(conn, id_registro, nome, valor):
 def buscar_registros(conn, termo):
     cursor = conn.cursor(dictionary=True)
     query1 = "SELECT * FROM Funcionarios WHERE Nome LIKE %s OR Empresa LIKE %s"
-    query2 = "SELECT * FROM Uso_Convenio WHERE Nome LIKE %s OR Empresa LIKE %s"
     cursor.execute(query1, ('%' + termo + '%', '%' + termo + '%'))
     resultados1 = cursor.fetchall()
-    cursor.execute(query2, ('%' + termo + '%', '%' + termo + '%'))
-    resultados2 = cursor.fetchall()
+
+    if resultados1:
+        ID_Funcionario = resultados1
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM Uso_Convenio WHERE ID_Funcionario = ?" (ID_Funcionario))
+        resultados2 = cursor.fetchall()
+
     return resultados1, resultados2
 
 # Configurar autenticação de usuários
 def autenticar_usuario():
-    credentials = {
-        "usernames": {
-            "usuario1": {
-                "name": "User 1",
-                "password": "senha1"
-            },
-            "usuario2": {
-                "name": "User 2",
-                "password": "senha2"
-            }
-        }
-    }
+    with open('config.yaml') as file:
+        config = yaml.load(file, Loader=SafeLoader)
+        
+        authenticator = stauth.Authenticate (
+            config['credentials'],
+            config['cookie']['name'],
+            config['cookie']['key'],
+            config['cookie']['expiry_days'],
+        )
 
-    #with open('config.yaml') as file:
-        #config = yaml.load(file, Loader=SafeLoader)
-    authenticator = stauth.Authenticate(
-        credentials,
-        'cookie_app',
-        'cookie_key',
-        cookie_expiry=300,
-    )
-    return authenticator
-
-# Configuração do Streamlit para navegação
-def set_page_config():
-    st.set_page_config(page_title="Gestão de Captação", layout="wide")
-    st.sidebar.title("Menu")
-    page = st.sidebar.radio("Navegação", ["Upload de CSV", "Visualização de Dados", "Deletar Registro", "Editar Registro", "Log de Transações"])
-    return page
+        return authenticator
 
 # Página de upload de CSV
 def pagina_upload(nome_responsavel):
@@ -200,7 +186,7 @@ def pagina_visualizacao():
     st.write(dados_df1)
 
     st.subheader("Todos os Dados da UsoConvenio:")
-    query2 = "SELECT * FROM UsoConvenio"
+    query2 = "SELECT * FROM Uso_Convenio"
     dados_df2 = pd.read_sql(query2, conn)
     st.write(dados_df2)
 
@@ -221,11 +207,16 @@ def pagina_edicao():
     st.title("Editar Registro")
     conn = conectar_banco()
     id_editar = st.number_input("Digite o ID do registro para editar", min_value=1, step=1)
+    idfunc_editar = st.text_input("Novo ID funcionario")
     nome_editar = st.text_input("Novo nome")
-    valor_editar = st.number_input("Novo valor", step=0.01)
+    cpf_editar = st.number_input("Novo CPF")
+    nasc_editar = st.date_input("Nova data de nascimento", format="DD/MM/YYYY")
+    empresa_editar = st.text_input("Nova empresa")
+    cnpj_editar = st.number_input("Novo CNPJ")
+
     if st.button("Salvar Edição"):
         try:
-            editar_registro(conn, id_editar, nome_editar, valor_editar)
+            editar_registro(conn, id_editar, idfunc_editar, nome_editar, cpf_editar, nasc_editar, empresa_editar, cnpj_editar)
             st.success(f"Registro com ID {id_editar} editado com sucesso.")
         except Exception as e:
             st.error(f"Erro ao editar o registro: {str(e)}")
@@ -240,20 +231,18 @@ def pagina_log():
 
 # Função principal
 def main():
-    #authenticator = autenticar_usuario()
+    authenticator = autenticar_usuario()
+    authentication_status = authenticator.login()
 
-    #try:
-    #    name, authentication_status, username = authenticator.login("Login", "main")
-    #except ValueError as e:
-    #   st.error(f"Ocorreu um erro: {e}")
     
-    #if authentication_status:
-        page = set_page_config()
-
-        # Nome do usuário responsável
-        nome_responsavel = input('Coloque seu nome')
-
+    if st.session_state["authentication_status"]:
+        authenticator.logout()
+        st.write(f"Bem vindo {st.session_state["name"]}")
+        st.sidebar.title("Menu")
+        page = st.sidebar.radio("Navegação", ["Upload de CSV", "Visualização de Dados", "Deletar Registro", "Editar Registro", "Log de Transações"])
+        
         if page == "Upload de CSV":
+            nome_responsavel = st.session_state["name"]
             pagina_upload(nome_responsavel)
         elif page == "Visualização de Dados":
             pagina_visualizacao()
@@ -263,10 +252,10 @@ def main():
             pagina_edicao()
         elif page == "Log de Transações":
             pagina_log()
-    #elif authentication_status == False:
-    #    st.error("Usuário/senha incorretos")
-    #elif authentication_status == None:
-    #    st.warning("Por favor, entre com seus dados")
+    elif st.session_state["authentication_status"] is False:
+        st.error("Usuário/senha incorretos")
+    elif st.session_state["authentication_status"] is None:
+        st.warning("Por favor, entre com seus dados")
 
 if __name__ == "__main__":
     main()

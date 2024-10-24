@@ -1,8 +1,9 @@
 credentials:
   usernames:
     user1:
-      name: "User 1"
-      password: "senha_hash"
+      name: "user 1"
+      password: "123"
+      email: "teste@gmail.com"
 
 cookie:
   expiry_days: 30
