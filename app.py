@@ -12,7 +12,7 @@ def conectar_banco():
     conn = mysql.connector.connect(
         host="localhost", 
         user="root",
-        password="Souza@23",
+        password="",
         database="captacao"
     )
     return conn
@@ -176,7 +176,7 @@ def pagina_visualizacao():
         resultados1, resultados2 = buscar_registros(conn, termo_busca)
         st.write("Resultados em Funcionarios:")
         st.write(resultados1)
-        st.write("Resultados em UsoConvenio:")
+        st.write("Resultados em Uso de Convenio:")
         st.write(resultados2)
 
     # Exibir todos os dados
@@ -185,7 +185,7 @@ def pagina_visualizacao():
     dados_df1 = pd.read_sql(query1, conn)
     st.write(dados_df1)
 
-    st.subheader("Todos os Dados da UsoConvenio:")
+    st.subheader("Todos os Dados em Uso de Convenio:")
     query2 = "SELECT * FROM Uso_Convenio"
     dados_df2 = pd.read_sql(query2, conn)
     st.write(dados_df2)
@@ -237,7 +237,6 @@ def main():
     
     if st.session_state["authentication_status"]:
         authenticator.logout()
-        st.write(f"Bem vindo {st.session_state["name"]}")
         st.sidebar.title("Menu")
         page = st.sidebar.radio("Navegação", ["Upload de CSV", "Visualização de Dados", "Deletar Registro", "Editar Registro", "Log de Transações"])
         
