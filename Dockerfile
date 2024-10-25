@@ -1,4 +1,4 @@
-FROM python:${PYTHON_VERSION}-slim as base
+FROM python:3.12
 
 WORKDIR /projetoIntegrador
 
