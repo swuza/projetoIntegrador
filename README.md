@@ -1,3 +1,1 @@
-# projeto Integrador
-
-prototipo de workflow com registro de captações e autenticação de empresas
+# Projeto Integrador - GTI 2024
