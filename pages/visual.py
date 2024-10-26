@@ -22,11 +22,11 @@ def pagina_visualizacao():
 
     # Exibir todos os dados
     st.subheader("Todos os Dados da Funcionarios:")
-    query1 = "SELECT * FROM Funcionarios"
+    query1 = "SELECT * FROM funcionarios"
     dados_df1 = pd.read_sql(query1, conn)
     st.write(dados_df1)
 
     st.subheader("Todos os Dados em Uso de Convenio:")
-    query2 = "SELECT * FROM Uso_Convenio"
+    query2 = "SELECT * FROM uso_convenio"
     dados_df2 = pd.read_sql(query2, conn)
     st.write(dados_df2)

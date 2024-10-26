@@ -3,7 +3,7 @@ import re
 
 def validar_csv(df):
     # Verifica se as colunas corretas estão presentes
-    if not {'Nome', 'Empresa'}.issubset(df.columns):
+    if not {'nome', 'empresa'}.issubset(df.columns):
         return False, "O CSV precisa conter as colunas 'Nome' e 'Empresa'."
     
     # Verificar se a coluna 'nome' contém valores válidos (não vazios e sem caracteres especiais)
