@@ -4,6 +4,7 @@ from database import conectar_banco
 from modules import editar_registro
 
 
+
 def pagina_edicao():
     st.title("Editar Registro")
     conn = conectar_banco()

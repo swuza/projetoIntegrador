@@ -5,13 +5,14 @@ from database import conectar_banco
 from modules import validar_csv, inserir_dados_func, inserir_dados_uso, registrar_log
 
 
+
 def pagina_upload(nome_responsavel):
     st.title("Upload de CSV")
-    
+        
     # Upload de dois arquivos CSV
     arquivo_csv1 = st.file_uploader("Escolha o arquivo de Cadastro (.csv)", type="csv")
     arquivo_csv2 = st.file_uploader("Escolha o arquivo de Uso (.csv)", type="csv")
-    
+        
     # Botão para processar os uploads
     if st.button("Processar Arquivos"):
         conn = conectar_banco()  # Conectar ao banco antes de processar

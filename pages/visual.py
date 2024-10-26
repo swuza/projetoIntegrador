@@ -6,7 +6,6 @@ from database import conectar_banco
 from modules import buscar_registros
 
 
-
 def pagina_visualizacao():
     st.title("Visualização de Dados")
     conn = conectar_banco()

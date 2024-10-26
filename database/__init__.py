@@ -1,1 +1,1 @@
-from db_conection import conectar_banco
+from database.db_conection import conectar_banco

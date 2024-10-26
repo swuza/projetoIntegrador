@@ -1,12 +1,9 @@
 import streamlit as st
-import mysql.connector
+from sqlalchemy import create_engine
 
 
 def conectar_banco():
-    conn = mysql.connector.connect(
-        host="localhost", 
-        user="root",
-        password="",
-        database="captacao"
-    )
+    conn = create_engine(
+        'postgresql://postgres:HhEWwioNxQYtNWznhmnKxjViFwihrwSy@postgres.railway.internal:5432/railway'
+    ).connect()
     return conn
