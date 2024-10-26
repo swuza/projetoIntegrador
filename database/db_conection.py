@@ -14,8 +14,8 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Função para obter a sessão
 def get_db():
-    db = SessionLocal()
+    conn = SessionLocal()
     try:
-        yield db
+        yield conn
     finally:
-        db.close()
+        conn.close()
