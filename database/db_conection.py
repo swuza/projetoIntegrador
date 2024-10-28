@@ -6,7 +6,8 @@ import pymysql
 
 load_dotenv()
 
-DATABASE_URL = os.getenv("MYSQL_PUBLIC_URL")
+DATABASE_URL = os.getenv("mysql+pymysql://root:rZfgEyBBGafsSzBCLFRJvXIUBIqoHpOw@autorack.proxy.rlwy.net:41618/railway")
+
 
 # Configurar o engine de conexão com o banco de dados
 engine = create_engine(DATABASE_URL)
