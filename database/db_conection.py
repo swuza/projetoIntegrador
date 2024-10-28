@@ -13,9 +13,9 @@ engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Função para obter a sessão
-def get_db():
+def conectar_banco():
     conn = SessionLocal()
     try:
-        yield conn
+        return conn
     finally:
         conn.close()

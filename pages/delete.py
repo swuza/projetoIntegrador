@@ -1,6 +1,6 @@
 import streamlit as st
 
-from database import conectar_banco
+from database.db_conection import conectar_banco
 from modules import deletar_registro
 
 
