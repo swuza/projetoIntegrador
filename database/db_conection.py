@@ -2,6 +2,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 import os
+import pymysql
+
 load_dotenv()
 
 DATABASE_URL = os.getenv("MYSQL_PUBLIC_URL")
