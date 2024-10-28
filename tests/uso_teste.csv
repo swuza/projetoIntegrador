@@ -1,0 +1,4 @@
+id_uso,id_funcionario,nome_convenio,tipo_convenio,data_uso,tipo_atendimento
+1,101,Convênio A,Saúde,2024-01-15,Consulta
+2,102,Convênio B,Odontológico,2024-02-20,Exame
+3,103,Convênio C,Farmácia,2024-03-10,Medicação

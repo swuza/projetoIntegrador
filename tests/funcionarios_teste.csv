@@ -1,0 +1,4 @@
+id_funcionario,nome,cpf,data_nasc,empresa,cnpj
+1,João Silva,123.456.789-00,1985-06-15,Empresa A,12.345.678/0001-00
+2,Maria Oliveira,987.654.321-00,1990-09-25,Empresa B,98.765.432/0001-00
+3,Carlos Souza,456.789.123-00,1975-11-02,Empresa C,45.678.912/0001-00

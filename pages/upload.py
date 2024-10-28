@@ -29,15 +29,15 @@ def pagina_upload(nome_responsavel):
             else:
                 try:
                     # Inserir os dados na Funcionario
-                    inserir_dados_func(conn, df1)
+                    inserir_dados_func(df1)
 
                     # Registrar o log de sucesso
-                    registrar_log(conn, arquivo_csv1.name, nome_responsavel, 'Sucesso', 'Dados inseridos com sucesso na Funcionarios')
+                    registrar_log(arquivo_csv1.name, nome_responsavel, 'Sucesso')
 
-                    st.success(f"Arquivo {arquivo_csv1.name} processado e inserido na Funcionarios com sucesso!")
+                    st.success(f"Arquivo {arquivo_csv1.name} processado e inserido em Funcionarios com sucesso!")
                 except Exception as e:
                     # Registrar o log de erro
-                    registrar_log(conn, arquivo_csv1.name, nome_responsavel, 'Erro', str(e))
+                    registrar_log(arquivo_csv1.name, nome_responsavel, 'Erro')
                     st.error(f"Erro ao processar o arquivo {arquivo_csv1.name}: {str(e)}")
         else:
             st.warning("Por favor, envie o primeiro arquivo CSV.")
@@ -54,15 +54,15 @@ def pagina_upload(nome_responsavel):
             else:
                 try:
                     # Inserir os dados na UsoConvenio
-                    inserir_dados_uso(conn, df2)
+                    inserir_dados_uso(df2)
 
                     # Registrar o log de sucesso
-                    registrar_log(conn, arquivo_csv2.name, nome_responsavel, 'Sucesso', 'Dados inseridos com sucesso em UsoConvenio')
+                    registrar_log(arquivo_csv2.name, nome_responsavel, 'Sucesso')
 
-                    st.success(f"Arquivo {arquivo_csv2.name} processado e inserido em UsoConvenio com sucesso!")
+                    st.success(f"Arquivo {arquivo_csv2.name} processado e inserido em Uso de Convenio com sucesso!")
                 except Exception as e:
                     # Registrar o log de erro
-                    registrar_log(conn, arquivo_csv2.name, nome_responsavel, 'Erro', str(e))
+                    registrar_log(arquivo_csv2.name, nome_responsavel, 'Erro')
                     st.error(f"Erro ao processar o arquivo {arquivo_csv2.name}: {str(e)}")
         else:
             st.warning("Por favor, envie o segundo arquivo CSV.")

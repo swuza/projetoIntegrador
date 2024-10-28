@@ -3,7 +3,6 @@ import pandas as pd
 
 from database import conectar_banco
 
-
 def pagina_log():
     st.title("Log de Captacao")
     conn = conectar_banco()
