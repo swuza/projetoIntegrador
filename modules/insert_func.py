@@ -8,5 +8,5 @@ def inserir_dados_func(df):
     for index, row in df.iterrows():
         query = "INSERT INTO funcionarios (id_funcionario, nome, cpf, data_nascimento, empresa, cnpj) \
             VALUES (%s, %s, %s, %s, %s, %s)"
-        conn._cursor_execute(query, tuple(row))
+        conn.execute(query, tuple(row))
     conn.commit()

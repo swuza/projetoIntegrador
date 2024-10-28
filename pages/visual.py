@@ -5,7 +5,6 @@ from sqlalchemy import engine
 
 from database import conectar_banco
 from modules import buscar_registros
-from modules import carregar_dados
 
 
 def pagina_visualizacao():

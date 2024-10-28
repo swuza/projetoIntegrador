@@ -10,6 +10,6 @@ def registrar_log(arquivo, responsavel, status):
     data_hora = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     valores = (arquivo, responsavel, data_hora, status)
 
-    conn._cursor_execute(query, valores)
+    conn.execute(query, valores)
 
     conn.commit()
