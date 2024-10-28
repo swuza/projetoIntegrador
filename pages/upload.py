@@ -1,5 +1,5 @@
 from database import conectar_banco
-from modules import validar_csv, inserir_dados_func, inserir_dados_uso, registrar_log
+from modules import validar_csv_func, validar_csv_uso, inserir_dados_func, inserir_dados_uso, registrar_log
 import streamlit as st
 import pandas as pd
 
@@ -21,7 +21,7 @@ def pagina_upload(nome_responsavel):
                 df1 = pd.read_csv(arquivo_csv1)
 
                 # Validar o CSV
-                valido, mensagem = validar_csv(df1)
+                valido, mensagem = validar_csv_func(df1)
                 if not valido:
                     st.error(f"Erro no arquivo {arquivo_csv1.name}: {mensagem}")
                 else:
@@ -49,7 +49,7 @@ def pagina_upload(nome_responsavel):
                 df2 = pd.read_csv(arquivo_csv2)
 
                 # Validar o CSV
-                valido, mensagem = validar_csv(df2)
+                valido, mensagem = validar_csv_uso(df2)
                 if not valido:
                     st.error(f"Erro no arquivo {arquivo_csv2.name}: {mensagem}")
                 else:

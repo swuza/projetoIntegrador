@@ -5,4 +5,5 @@ from modules.insert_func import inserir_dados_func
 from modules.insert_uso import inserir_dados_uso
 from modules.register_log import registrar_log
 from modules.search import buscar_registros
-from modules.validation import validar_csv
+from modules.validation import validar_csv_func
+from modules.validation import validar_csv_uso
