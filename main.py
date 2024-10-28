@@ -25,10 +25,8 @@ def main():
             pagina_edicao()
         elif page == "Log de Transações":
             pagina_log()
-    elif st.session_state["authentication_status"] is False:
+    elif st.session_state[authentication_status] is False:
         st.error("Usuário/senha incorretos")
-    elif st.session_state["authentication_status"] is None:
-        st.warning("Por favor, entre com seus dados")
 
 if __name__ == "__main__":
     main()

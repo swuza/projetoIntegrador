@@ -17,7 +17,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Função para obter a sessão
 def conectar_banco():
-    conn = SessionLocal()
+    conn = engine.connect()
     try:
         return conn
     finally:
